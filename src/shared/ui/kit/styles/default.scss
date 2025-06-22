@@ -1,0 +1,19 @@
+@use '@styles/utils';
+
+html {
+	@include utils.scroll-style();
+	@include utils.font();
+	background: var(--color-bg);
+}
+
+.container {
+	margin: auto;
+	max-width: 1200px;
+	padding: 0.75rem;
+}
+
+.icon {
+	width: 1.5rem;
+	height: 1.5rem;
+	color: var(--color-primary);
+}
