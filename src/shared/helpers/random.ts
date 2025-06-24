@@ -2,7 +2,7 @@ export const random = () => {
 	return Math.round(Math.random() * 10 ** 9)
 }
 
-let id = 0
+let id = 1
 export const useID = () => {
-	return 'id-' + id++
+	return id
 }

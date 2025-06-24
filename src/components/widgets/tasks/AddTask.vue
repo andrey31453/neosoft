@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconTrash from '@/components/icons/IconTrash.vue'
 import Button from '@/shared/ui/kit/Button.vue'
 import Input from '@/shared/ui/kit/Input.vue'
 import { ref } from 'vue'
@@ -8,6 +9,7 @@ const store = useStore()
 
 const value = ref('')
 const addTask = async () => {
+	console.log('addTask: ', addTask)
 	await store.dispatch('tasks/addTask', value.value)
 	value.value = ''
 }
@@ -26,6 +28,12 @@ const addTask = async () => {
 			type="submit"
 			label="Добавить"
 		/>
+		<Button
+			fit
+			@click.stop.prevent="store.dispatch('tasks/deleteTasks')"
+		>
+			<IconTrash class="add-task--icon" />
+		</Button>
 	</form>
 </template>
 
@@ -36,7 +44,9 @@ const addTask = async () => {
 	align-content: center;
 	gap: 1rem;
 
-	padding: 2rem 0 1rem 0;
-	background: var(--color-bg);
+	&--icon {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
 }
 </style>

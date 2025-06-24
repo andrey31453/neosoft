@@ -10,8 +10,10 @@ store.dispatch('tasks/load')
 
 <template>
 	<div class="tasks">
-		<AddTask class="tasks--add" />
-		<TasksFilter />
+		<div class="tasks--top">
+			<AddTask />
+			<TasksFilter />
+		</div>
 		<TheTasks />
 	</div>
 </template>
@@ -26,9 +28,15 @@ store.dispatch('tasks/load')
 	align-content: center;
 	gap: 1.5rem;
 
-	&--add {
+	&--top {
 		position: sticky;
 		top: 0;
+
+		display: grid;
+		gap: 1.5rem;
+
+		padding: 2rem 0 1rem 0;
+		background: var(--color-bg);
 	}
 }
 </style>

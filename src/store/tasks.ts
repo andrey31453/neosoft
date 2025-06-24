@@ -1,5 +1,19 @@
 import { ITask } from '@/services/tasks/tasks.schema.js'
-import { addTask, deleteTask, getTasks, updateTask } from '@/services/tasks/tasks.servce.js'
+import {
+	addTask,
+	deleteTask,
+	deleteTasks,
+	getTasks,
+	updateTask,
+} from '@/services/tasks/tasks.servce.js'
+import { useID } from '@/shared/helpers/random.js'
+
+const fakeTasks = () =>
+	[...Array(30).keys()].map((_, idx) => ({
+		id: useID(),
+		completed: Math.random() > 0.5,
+		title: 'Задача №' + ++idx,
+	}))
 
 export enum taskFilter {
 	all,
@@ -40,6 +54,14 @@ export default {
 		async load({ state }) {
 			const tasks = await getTasks()
 			if (!tasks) return
+
+			if (!localStorage.getItem('tasks')) {
+				const initTasks = fakeTasks()
+				localStorage.setItem('tasks', JSON.stringify(initTasks))
+				state.tasks = initTasks
+				return
+			}
+
 			state.tasks = tasks
 		},
 
@@ -66,6 +88,11 @@ export default {
 			if (!~taskIndex) return
 
 			state.tasks.splice(taskIndex, 1)
+		},
+
+		async deleteTasks({ state }) {
+			await deleteTasks()
+			state.tasks = []
 		},
 	},
 }

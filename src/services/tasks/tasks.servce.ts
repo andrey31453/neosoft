@@ -54,3 +54,13 @@ export const deleteTask = errorBoundary(async (id: number): Promise<IServiceResp
 		code: 200,
 	}
 })
+
+export const deleteTasks = errorBoundary(async (): Promise<IServiceResponse> => {
+	await randomDelay()
+	_setTasks([])
+
+	return {
+		message: 'Успешно',
+		code: 200,
+	}
+})
