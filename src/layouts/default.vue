@@ -63,7 +63,7 @@ import ThemeButton from '@/shared/ui/kit/theme/ThemeButton.vue'
 main {
 	height: 100%;
 	width: 100%;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 .footer {
