@@ -6,7 +6,12 @@ export enum themeVariant {
 export interface IThemeConfig {
 	color: {
 		'primary': string
+		'primary-50': string
+		'primary-100': string
 		'primary-200': string
+		'primary-700': string
+
+		'error': string
 		'bg': string
 		'bg-200': string
 		'text': string
@@ -23,7 +28,7 @@ export interface IThemeConfig {
 	}
 
 	animation: {
-		time: number
+		time: string
 		method: string
 	}
 }

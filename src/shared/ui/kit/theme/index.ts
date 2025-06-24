@@ -8,29 +8,33 @@ const configs: Record<themeVariant, IThemeConfig> = {
 	light: lightTheme,
 	dark: darkTheme,
 }
+const themeLSkey = 'theme-is-dark'
+const initialIsDark = (variant?: themeVariant) => {
+	const lsTheme = localStorage.getItem(themeLSkey)
+	return JSON.parse(lsTheme) ?? variant === themeVariant.DARK
+}
 
 export const useTheme = singleton((variant?: themeVariant, config?: IThemeConfig) => {
-	const isDark = ref(false)
-	const setTheme = (variant: themeVariant) => {
+	const isDark = ref(initialIsDark(variant))
+
+	const setTheme = () => {
+		const variant = isDark.value ? themeVariant.DARK : themeVariant.LIGHT
 		const newConfig = config ? Object.assign(configs[variant], config) : configs[variant]
+
 		Object.entries(newConfig).forEach(([key, valueGroup]) => {
 			Object.entries(valueGroup).forEach(([subKey, subValue]) => {
 				document.documentElement.style.setProperty(`--${key}-${subKey}`, subValue)
 			})
 		})
 	}
+
 	const changeTheme = () => {
 		isDark.value = !isDark.value
-		isDark.value ? setTheme(themeVariant.DARK) : setTheme(themeVariant.LIGHT)
+		localStorage.setItem(themeLSkey, String(isDark.value))
+		setTheme()
 	}
 
-	const defineTheme = () => {
-		if (!variant) return
-
-		isDark.value = variant === themeVariant.DARK ? false : true
-		changeTheme()
-	}
-	defineTheme()
+	setTheme()
 
 	return {
 		isDark,

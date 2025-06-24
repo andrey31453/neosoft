@@ -4,11 +4,16 @@ import { defaultTheme } from './default.js'
 export const darkTheme = {
 	...defaultTheme,
 	color: {
-		'primary': 'red',
-		'primary-200': 'red',
-		'bg': 'white',
-		'bg-200': 'gray',
-		'text': 'black',
-		'text-200': 'black',
+		'primary-50': 'rgb(51 72 117)',
+		'primary-100': 'rgb(75 104 170)',
+		'primary-200': 'rgb(103 134 203)',
+		'primary': 'rgb(124 173 224)',
+		'primary-700': 'rgb(225 231 245)',
+
+		'error': 'rgb(199 87 88)',
+		'bg': 'rgb(32 32 32)',
+		'bg-200': 'rgb(45 45 65)',
+		'text': 'rgb(255 255 255)',
+		'text-200': 'rgb(245 245 245)',
 	},
 } as IThemeConfig

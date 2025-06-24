@@ -15,6 +15,7 @@ export const addTask = errorBoundary(async (task: ICreateTask): Promise<ITask> =
 	const tasks = _getTasks()
 	const newTask = {
 		id: Math.random(),
+		completed: false,
 		...task,
 	}
 	tasks.push(newTask)
@@ -28,8 +29,9 @@ export const updateTask = errorBoundary(async (task: ITask): Promise<IServiceRes
 
 	const tasks = _getTasks()
 	const taskIndex = tasks.findIndex((t) => t.id === task.id)
-	if (!taskIndex) throw new Error('Нет таски с id ' + task.id)
-	_setTasks(tasks.splice(taskIndex, 1, task))
+	if (!~taskIndex) throw new Error('Нет таски с id ' + task.id)
+	tasks.splice(taskIndex, 1, task)
+	_setTasks(tasks)
 
 	return {
 		message: 'Успешно',
@@ -42,8 +44,10 @@ export const deleteTask = errorBoundary(async (id: number): Promise<IServiceResp
 
 	const tasks = _getTasks()
 	const taskIndex = tasks.findIndex((t) => t.id === id)
-	if (!taskIndex) throw new Error('Нет таски с id ' + id)
-	_setTasks(tasks.splice(taskIndex, 1))
+	if (!~taskIndex) throw new Error('Нет таски с id ' + id)
+
+	tasks.splice(taskIndex, 1)
+	_setTasks(tasks)
 
 	return {
 		message: 'Успешно',
