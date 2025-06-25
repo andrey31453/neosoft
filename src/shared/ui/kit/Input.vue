@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import WithError from './WithError.vue'
 import WithLabel from './WithLabel.vue'
 
 defineOptions({ inheritAttrs: false })
-defineProps<{ label: string }>()
+defineProps<{
+	label: string
+	error: string | undefined | boolean
+}>()
 
 const value = defineModel<string>({ default: '' })
 </script>
@@ -13,11 +17,13 @@ const value = defineModel<string>({ default: '' })
 		:value="value"
 	>
 		<template #default="{ id }">
-			<input
-				v-model="value"
-				v-bind="$attrs"
-				:id="id"
-			/>
+			<WithError :error="error">
+				<input
+					v-model="value"
+					v-bind="$attrs"
+					:id="id"
+				/>
+			</WithError>
 		</template>
 	</WithLabel>
 </template>

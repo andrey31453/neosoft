@@ -11,7 +11,7 @@ export const defaultTheme: Partial<IThemeConfig> = {
 		'3xl': '1.5rem',
 	},
 	animation: {
-		time: '120ms',
+		time: '200ms',
 		method: 'linear',
 	},
 }

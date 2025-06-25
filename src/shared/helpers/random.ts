@@ -4,5 +4,8 @@ export const random = () => {
 
 let id = 1
 export const useID = () => {
-	return id
+	return id++
+}
+export const useStringID = () => {
+	return String(id++)
 }

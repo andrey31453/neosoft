@@ -30,12 +30,6 @@ defineProps<{
 	border-radius: 0.5rem;
 	cursor: pointer;
 
-	&:disabled {
-		background-color: var(--color-bg-200);
-		cursor: not-allowed;
-		color: var(--color-text-200);
-	}
-
 	// submit
 	&:not(.--text):not(.--fit) {
 		padding: 1rem;
@@ -72,6 +66,13 @@ defineProps<{
 	&:active.--text,
 	&:active.--fit {
 		background-color: var(--color-primary-100);
+		color: var(--color-text-200);
+	}
+
+	// disabled
+	&:disabled {
+		background-color: var(--color-bg) !important;
+		cursor: not-allowed;
 		color: var(--color-text-200);
 	}
 }

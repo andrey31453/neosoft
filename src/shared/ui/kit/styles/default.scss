@@ -13,12 +13,13 @@ html {
 	padding: 0 0.75rem;
 }
 
+// transition animate
 .list-enter-active,
 .list-leave-active {
-	transition: all 0.5s ease;
+	transition: all var(--animation-time) var(--animation-method);
 }
 .list-enter-from,
 .list-leave-to {
 	opacity: 0;
-	transform: translateX(30px);
+	transform: translateX(50px);
 }

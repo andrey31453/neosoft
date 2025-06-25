@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { useID } from '@/shared/helpers/random'
+import { useStringID } from '@/shared/helpers/random'
 
 defineProps<{
 	label: string
 	value: string
 }>()
-const id = useID()
-
-const addTask = () => console.log('fdsfdsf')
+const id = useStringID()
 </script>
 
 <template>
@@ -25,10 +23,7 @@ const addTask = () => console.log('fdsfdsf')
 		</label>
 
 		<div class="with-label__slot">
-			<slot
-				:id="id"
-				@focus="addTask"
-			/>
+			<slot :id="id" />
 		</div>
 	</div>
 </template>
